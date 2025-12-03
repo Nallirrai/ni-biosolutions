@@ -123,9 +123,8 @@
                     const API_KEY = "AIzaSyAd_3L8GJYoau5GFrZoT_QGDeKaAs9XjpM"; 
 
                     const genAI = new GoogleGenerativeAI(API_KEY);
-                    
-                    // FIXED: Changed from 'gemini-1.5-flash' to 'gemini-pro' for maximum compatibility
-                    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+                    // Updated Model to the latest stable version
+                    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
                     const systemContext = `
                         You are the Senior Technical Consultant AI for "NI Biosolutions".
