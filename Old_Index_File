@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NI Biosolutions | Industrial Microbiology & Process Architecture</title>
+    <meta name="description" content="Customized Probiotic Solutions and High-Density Fermentation Consultants.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+        .teal-text { color: #008080; }
+        .teal-bg { background-color: #008080; }
+        .dark-bg { background-color: #1a202c; }
+        .hover-lift:hover { transform: translateY(-2px); transition: transform 0.2s; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- HERO SECTION -->
+    <header class="dark-bg text-white py-12 px-6 text-center shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4">
+                NI <span class="text-teal-400">BIOSOLUTIONS</span>
+            </h1>
+            <p class="text-sm md:text-base tracking-widest uppercase text-gray-400 mb-8">
+                Microbial Intelligence & Process Architecture
+            </p>
+            <div class="inline-block px-6 py-2 border border-teal-500 rounded-full text-teal-300 text-xs font-semibold tracking-wide bg-teal-900/20">
+                OFFICIAL DIGITAL GATEWAY
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-6xl mx-auto w-full px-6 py-12 grid md:grid-cols-2 gap-12">
+
+        <!-- LEFT: DIRECTOR PROFILE & EXPERTISE -->
+        <div class="space-y-6">
+            <!-- Profile Card -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover-lift">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Director's Desk</h2>
+                <div class="w-16 h-1 teal-bg mb-6"></div>
+                
+                <h3 class="text-xl font-bold uppercase text-slate-700">Leo Antony</h3>
+                <p class="teal-text font-medium text-sm uppercase mb-4">Technical Director & Principal Consultant</p>
+                
+                <p class="text-slate-600 leading-relaxed mb-6">
+                    Specializing in <b>High-Density Fermentation (Up to 10¹¹ CFU)</b> and Industrial Bio-Process Engineering. 
+                    We convert biological concepts into scalable, profitable manufacturing assets.
+                </p>
+
+                <div class="flex flex-col gap-3">
+                    <a href="https://wa.me/919539136166" class="inline-flex items-center justify-center gap-2 teal-bg text-white px-6 py-3 rounded-lg font-bold hover:bg-teal-700 transition-colors">
+                        <span>💬</span> Connect on WhatsApp
+                    </a>
+                    <div class="flex gap-2 text-sm text-slate-500 justify-center md:justify-start mt-2">
+                        <span>📞 +91-9539136166</span> | 
+                        <!-- Rerouting Trick: Text shows director@, Link goes to leo@ -->
+                        <a href="mailto:leo@nallirrai.com" class="hover:text-teal-600 underline">director@nallirrai.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE COMPETENCIES (Updated) -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover-lift">
+                <h3 class="font-bold text-slate-700 mb-4 uppercase text-sm tracking-wide">Core Competencies</h3>
+                <ul class="space-y-4 text-slate-600">
+                    <li class="flex items-start gap-3">
+                        <span class="teal-text mt-1 text-lg">➤</span>
+                        <span><b>Aquaculture Probiotics:</b> Customized Proprietary Solutions & Strain Adaptation.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="teal-text mt-1 text-lg">➤</span>
+                        <span><b>Infrastructure:</b> Pilot Palace (GMP) Design & Execution.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="teal-text mt-1 text-lg">➤</span>
+                        <span><b>Green-CIP:</b> Eco-friendly sanitation protocols.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RIGHT: AI DEMO (Interactive & Sanitized) -->
+        <div class="space-y-6">
+            <div class="bg-slate-900 text-white p-8 rounded-xl shadow-lg relative overflow-hidden border border-slate-800">
+                <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl">✨</div>
+                
+                <h2 class="text-xl font-bold mb-2 text-teal-300">Ask NI Intelligence</h2>
+                <p class="text-slate-400 text-xs mb-6">Powered by Gemini AI Engine (Beta)</p>
+
+                <div id="chatBox" class="bg-slate-800 h-80 rounded-lg p-4 mb-4 overflow-y-auto text-sm space-y-3 border border-slate-700">
+                    <div class="bg-teal-900/50 text-teal-100 p-3 rounded-lg border-l-2 border-teal-500">
+                        Hello. I am the AI Consultant for NI Biosolutions. Ask me about our <b>Customized Probiotic Solutions</b> or Facility Design.
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <input type="text" id="userInput" placeholder="Ex: What is High Density Fermentation?" class="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500" onkeypress="handleKeyPress(event)">
+                    <button onclick="simulateAI()" class="teal-bg text-white px-4 py-2 rounded font-bold hover:bg-teal-600 transition-colors">ASK</button>
+                </div>
+                
+                <!-- AI LOGIC (Sanitized for Secrecy) -->
+                <script>
+                    function handleKeyPress(e) {
+                        if(e.key === 'Enter') simulateAI();
+                    }
+
+                    function simulateAI() {
+                        const input = document.getElementById('userInput');
+                        const chat = document.getElementById('chatBox');
+                        const text = input.value;
+                        if(!text) return;
+
+                        // Add User Message
+                        chat.innerHTML += `<div class="bg-slate-700 text-white p-3 rounded-lg ml-8 mb-2 self-end text-right border-r-2 border-slate-500">${text}</div>`;
+                        input.value = '';
+                        chat.scrollTop = chat.scrollHeight;
+
+                        // Simulated AI Response (With delay)
+                        setTimeout(() => {
+                            let reply = "Please contact Technical Director Leo Antony for commercial proposals and specific technical parameters.";
+                            
+                            const t = text.toLowerCase();
+
+                            // LOGIC: High Density
+                            if(t.includes('density') || t.includes('cfu') || t.includes('yield')) {
+                                reply = "We specialize in <b> 10¹¹ CFU/g</b> fermentation technologies. Our 'Pilot Palace' architecture ensures maximum biomass recovery with minimal contamination risks.";
+                            }
+                            
+                            // LOGIC: Strains (Secrecy Mode)
+                            else if(t.includes('strain') || t.includes('species') || t.includes('name') || t.includes('bacteria')) {
+                                reply = "Our biological assets are <b>proprietary, site-specific bacterial consortia</b>. We do not use generic off-the-shelf strains. We customize the probiotic blend based on the client's specific water salinity and pathogenic load.";
+                            }
+                            
+                            // LOGIC: CIP
+                            else if(t.includes('cip') || t.includes('clean') || t.includes('waste')) {
+                                reply = "Our <b>Green-CIP Protocol</b> utilizes KOH and Heat thermodynamics instead of harsh chemicals. This converts effluent into a potassium-rich fertilizer, ensuring zero-waste compliance.";
+                            }
+                            
+                            // LOGIC: Fees
+                            else if(t.includes('fee') || t.includes('cost') || t.includes('price')) {
+                                reply = "For infrastructure design fees and technology transfer costs, please connect with Director Leo Antony directly via WhatsApp.";
+                            }
+
+                            // Add Bot Message
+                            chat.innerHTML += `<div class="bg-teal-900/50 text-teal-100 p-3 rounded-lg border-l-2 border-teal-500 mr-8 mb-2 animate-pulse">${reply}</div>`;
+                            chat.scrollTop = chat.scrollHeight;
+                        }, 1000);
+                    }
+                </script>
+            </div>
+
+            <div class="text-center text-xs text-slate-400 mt-4">
+                <p>Full Corporate Portal Launching: <b>Jan 2026</b></p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-500 text-xs">
+        <p class="font-bold tracking-wider text-slate-700">NI BIOSOLUTIONS</p>
+        <p>&copy; 2025 All Rights Reserved.</p>
+        <p class="mt-2">Regd. Office: Cuddalore, TN | MSME Regd. Unit</p>
+    </footer>
+
+</body>
+</html>
