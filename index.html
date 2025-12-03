@@ -14,6 +14,15 @@
         .teal-bg { background-color: #008080; }
         .dark-bg { background-color: #1a202c; }
         .hover-lift:hover { transform: translateY(-2px); transition: transform 0.2s; }
+        
+        /* Loading Animation */
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+            height: 6px; width: 6px; background-color: #008080; border-radius: 50%; display: inline-block;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -47,7 +56,7 @@
                 <p class="teal-text font-medium text-sm uppercase mb-4">Technical Director & Principal Consultant</p>
                 
                 <p class="text-slate-600 leading-relaxed mb-6">
-                    Specializing in <b>High-Density Fermentation (Up to 10¹¹ CFU)</b> and Industrial Bio-Process Engineering. 
+                    Specializing in <b>High-Density Fermentation ($10^{11}$ CFU)</b> and Industrial Bio-Process Engineering. 
                     We convert biological concepts into scalable, profitable manufacturing assets.
                 </p>
 
@@ -57,13 +66,12 @@
                     </a>
                     <div class="flex gap-2 text-sm text-slate-500 justify-center md:justify-start mt-2">
                         <span>📞 +91-9539136166</span> | 
-                        <!-- Rerouting Trick: Text shows director@, Link goes to leo@ -->
                         <a href="mailto:leo@nallirrai.com" class="hover:text-teal-600 underline">director@nallirrai.com</a>
                     </div>
                 </div>
             </div>
 
-            <!-- CORE COMPETENCIES (Updated) -->
+            <!-- CORE COMPETENCIES -->
             <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover-lift">
                 <h3 class="font-bold text-slate-700 mb-4 uppercase text-sm tracking-wide">Core Competencies</h3>
                 <ul class="space-y-4 text-slate-600">
@@ -77,78 +85,108 @@
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="teal-text mt-1 text-lg">➤</span>
-                        <span><b>Green-CIP:</b> Eco-friendly sanitation protocols.</span>
+                        <span><b>Green-CIP:</b> Eco-friendly sanitation protocols (KOH + Heat).</span>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <!-- RIGHT: AI DEMO (Interactive & Sanitized) -->
+        <!-- RIGHT: REAL AI DEMO -->
         <div class="space-y-6">
             <div class="bg-slate-900 text-white p-8 rounded-xl shadow-lg relative overflow-hidden border border-slate-800">
                 <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl">✨</div>
                 
                 <h2 class="text-xl font-bold mb-2 text-teal-300">Ask NI Intelligence</h2>
-                <p class="text-slate-400 text-xs mb-6">Powered by Gemini AI Engine (Beta)</p>
+                <p class="text-slate-400 text-xs mb-6">Powered by Gemini AI Engine (Real-Time)</p>
 
                 <div id="chatBox" class="bg-slate-800 h-80 rounded-lg p-4 mb-4 overflow-y-auto text-sm space-y-3 border border-slate-700">
                     <div class="bg-teal-900/50 text-teal-100 p-3 rounded-lg border-l-2 border-teal-500">
-                        Hello. I am the AI Consultant for NI Biosolutions. Ask me about our <b>Customized Probiotic Solutions</b> or Facility Design.
+                        Hello. I am the AI Consultant for NI Biosolutions. Ask me any technical question about our <b>Fermentation</b> or <b>Probiotics</b>.
                     </div>
                 </div>
 
+                <!-- Loading Indicator -->
+                <div id="loader" class="hidden ml-4 mb-2">
+                    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+                </div>
+
                 <div class="flex gap-2">
-                    <input type="text" id="userInput" placeholder="Ex: What is High Density Fermentation?" class="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500" onkeypress="handleKeyPress(event)">
-                    <button onclick="simulateAI()" class="teal-bg text-white px-4 py-2 rounded font-bold hover:bg-teal-600 transition-colors">ASK</button>
+                    <input type="text" id="userInput" placeholder="Ex: Why is Halomonas better?" class="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500" onkeypress="handleKeyPress(event)">
+                    <button onclick="askGemini()" id="sendBtn" class="teal-bg text-white px-4 py-2 rounded font-bold hover:bg-teal-600 transition-colors">ASK</button>
                 </div>
                 
-                <!-- AI LOGIC (Sanitized for Secrecy) -->
-                <script>
-                    function handleKeyPress(e) {
-                        if(e.key === 'Enter') simulateAI();
+                <!-- REAL GEMINI AI LOGIC -->
+                <script type="module">
+                    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+                    // ⚠️ PASTE YOUR API KEY HERE INSIDE THE QUOTES
+                    const API_KEY = "AIzaSyAd_3L8GJYoau5GFrZoT_QGDeKaAs9XjpM"; 
+
+                    const genAI = new GoogleGenerativeAI(API_KEY);
+                    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+                    const systemContext = `
+                        You are the Senior Technical Consultant AI for "NI Biosolutions".
+                        Founder: Leo Antony (Technical Director).
+                        
+                        CORE KNOWLEDGE:
+                        1. We specialize in High-Density Fermentation ($10^{11}$ CFU/g).
+                        2. Our "Pilot Palace" concept builds 1000 sq.ft GMP bio-facilities.
+                        3. We use "Green-CIP" (KOH + Heat) for eco-friendly sanitation.
+                        4. STRAIN SECRECY: If asked about strain names (like Halomonas), say: "We use proprietary, site-specific marine bacterial consortia customized for the client's water parameters." Do not confirm specific species names unless it's general knowledge.
+                        
+                        BEHAVIOR:
+                        - Be professional, scientific, and concise (max 2 sentences).
+                        - If asked about Prices/Fees: "Please contact Director Leo Antony directly via WhatsApp for a commercial proposal."
+                        - If asked about Competitors: Do not mention them. Focus on our "Customized Solutions".
+                    `;
+
+                    window.handleKeyPress = (e) => {
+                        if(e.key === 'Enter') askGemini();
                     }
 
-                    function simulateAI() {
+                    window.askGemini = async () => {
                         const input = document.getElementById('userInput');
                         const chat = document.getElementById('chatBox');
-                        const text = input.value;
-                        if(!text) return;
+                        const loader = document.getElementById('loader');
+                        const btn = document.getElementById('sendBtn');
+                        const userText = input.value.trim();
 
-                        // Add User Message
-                        chat.innerHTML += `<div class="bg-slate-700 text-white p-3 rounded-lg ml-8 mb-2 self-end text-right border-r-2 border-slate-500">${text}</div>`;
+                        if(!userText) return;
+
+                        // UI: Add User Message
+                        chat.innerHTML += `<div class="bg-slate-700 text-white p-3 rounded-lg ml-8 mb-2 self-end text-right border-r-2 border-slate-500">${userText}</div>`;
                         input.value = '';
                         chat.scrollTop = chat.scrollHeight;
 
-                        // Simulated AI Response (With delay)
-                        setTimeout(() => {
-                            let reply = "Please contact Technical Director Leo Antony for commercial proposals and specific technical parameters.";
-                            
-                            const t = text.toLowerCase();
+                        // UI: Show Loader
+                        loader.classList.remove('hidden');
+                        btn.disabled = true;
+                        btn.classList.add('opacity-50');
 
-                            // LOGIC: High Density
-                            if(t.includes('density') || t.includes('cfu') || t.includes('yield')) {
-                                reply = "We specialize in <b> 10¹¹ CFU/g</b> fermentation technologies. Our 'Pilot Palace' architecture ensures maximum biomass recovery with minimal contamination risks.";
-                            }
-                            
-                            // LOGIC: Strains (Secrecy Mode)
-                            else if(t.includes('strain') || t.includes('species') || t.includes('name') || t.includes('bacteria')) {
-                                reply = "Our biological assets are <b>proprietary, site-specific bacterial consortia</b>. We do not use generic off-the-shelf strains. We customize the probiotic blend based on the client's specific water salinity and pathogenic load.";
-                            }
-                            
-                            // LOGIC: CIP
-                            else if(t.includes('cip') || t.includes('clean') || t.includes('waste')) {
-                                reply = "Our <b>Green-CIP Protocol</b> utilizes KOH and Heat thermodynamics instead of harsh chemicals. This converts effluent into a potassium-rich fertilizer, ensuring zero-waste compliance.";
-                            }
-                            
-                            // LOGIC: Fees
-                            else if(t.includes('fee') || t.includes('cost') || t.includes('price')) {
-                                reply = "For infrastructure design fees and technology transfer costs, please connect with Director Leo Antony directly via WhatsApp.";
-                            }
+                        try {
+                            // API CALL
+                            const prompt = systemContext + "\nUser Question: " + userText;
+                            const result = await model.generateContent(prompt);
+                            const response = await result.response;
+                            const text = response.text();
 
-                            // Add Bot Message
-                            chat.innerHTML += `<div class="bg-teal-900/50 text-teal-100 p-3 rounded-lg border-l-2 border-teal-500 mr-8 mb-2 animate-pulse">${reply}</div>`;
-                            chat.scrollTop = chat.scrollHeight;
-                        }, 1000);
+                            // UI: Add AI Message
+                            chat.innerHTML += `<div class="bg-teal-900/50 text-teal-100 p-3 rounded-lg border-l-2 border-teal-500 mr-8 mb-2">${formatText(text)}</div>`;
+                        } catch (error) {
+                            console.error(error);
+                            chat.innerHTML += `<div class="bg-red-900/50 text-red-100 p-3 rounded-lg mr-8 mb-2">Connection Error. Please try again.</div>`;
+                        }
+
+                        // UI: Cleanup
+                        loader.classList.add('hidden');
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-50');
+                        chat.scrollTop = chat.scrollHeight;
+                    }
+
+                    function formatText(text) {
+                        return text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'); // Bold formatting
                     }
                 </script>
             </div>
