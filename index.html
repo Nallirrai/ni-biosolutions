@@ -111,7 +111,7 @@
                 </div>
 
                 <div class="flex gap-2">
-                    <input type="text" id="userInput" placeholder="Ex: What is High Density Fermentation?" class="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500" onkeypress="handleKeyPress(event)">
+                    <input type="text" id="userInput" placeholder="Ex: Why is High Density Fermentation better?" class="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500" onkeypress="handleKeyPress(event)">
                     <button onclick="askGemini()" id="sendBtn" class="teal-bg text-white px-4 py-2 rounded font-bold hover:bg-teal-600 transition-colors">ASK</button>
                 </div>
                 
@@ -123,7 +123,9 @@
                     const API_KEY = "AIzaSyAd_3L8GJYoau5GFrZoT_QGDeKaAs9XjpM"; 
 
                     const genAI = new GoogleGenerativeAI(API_KEY);
-                    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+                    
+                    // FIXED: Changed from 'gemini-1.5-flash' to 'gemini-pro' for maximum compatibility
+                    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
                     const systemContext = `
                         You are the Senior Technical Consultant AI for "NI Biosolutions".
@@ -132,7 +134,7 @@
                         CORE KNOWLEDGE:
                         1. We specialize in High-Density Fermentation (10¹¹ CFU/g).
                         2. Our "Pilot Palace" concept builds 1000 sq.ft GMP bio-facilities.
-                        3. We use "Green-CIP" (KOH + Heat) for eco-friendly sanitation.
+                        3. We use "Green-CIP" for eco-friendly sanitation.
                         4. STRAIN SECRECY: If asked about strain names, say: "We use proprietary, site-specific marine bacterial consortia customized for the client's water parameters." Do not confirm specific species names unless it's general knowledge.
                         
                         BEHAVIOR:
@@ -175,7 +177,13 @@
                             chat.innerHTML += `<div class="bg-teal-900/50 text-teal-100 p-3 rounded-lg border-l-2 border-teal-500 mr-8 mb-2">${formatText(text)}</div>`;
                         } catch (error) {
                             console.error(error);
-                            chat.innerHTML += `<div class="bg-red-900/50 text-red-100 p-3 rounded-lg mr-8 mb-2">Connection Error. Please try again.</div>`;
+                            // Error Handling
+                            let errorMsg = "Connection Error. Please check your internet.";
+                            if (error.message.includes("400")) errorMsg = "AI Error: Bad Request (400).";
+                            if (error.message.includes("401")) errorMsg = "AI Error: Invalid API Key (401).";
+                            if (error.message.includes("404")) errorMsg = "AI Error: Model Not Found (404).";
+                            
+                            chat.innerHTML += `<div class="bg-red-900/50 text-red-100 p-3 rounded-lg mr-8 mb-2">${errorMsg}</div>`;
                         }
 
                         // UI: Cleanup
